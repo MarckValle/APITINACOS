@@ -24,3 +24,5 @@ urlpatterns = [
     path('SignUp', Login.as_view(),name='Signup'),
     path('SignIp', SignIn.as_view(),name='SignIn')
 ]
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns # new
+urlpatterns += staticfiles_urlpatterns() # new
