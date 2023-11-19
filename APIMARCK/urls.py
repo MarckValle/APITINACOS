@@ -20,9 +20,9 @@ from api.views import Home
 from api.views import SignIn
 urlpatterns = [
     #path('admin/', admin.site.urls),
-    path('', Home.as_view(),name='Home'),
-    path('SignUp', Login.as_view(),name='Signup'),
-    path('SignIp', SignIn.as_view(),name='SignIn')
+    path('Home/', Home.as_view(),name='Home'),
+    path('Login/', Login.as_view(),name='Login'),
+    path('', SignIn.as_view(),name='SignIn')
 ]
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns # new
 urlpatterns += staticfiles_urlpatterns() # new

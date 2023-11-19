@@ -158,7 +158,8 @@ h6 {
    #BACKGROUND
    ========================================================================== */
 .bg-blue {
-  background: #2c6ed5;
+  background: rgba(68,172,156);
+  /*background: url("../images/fondo1.jpg") center center/cover no-repeat;*/
 }
 
 /* ==========================================================================
@@ -192,7 +193,7 @@ h6 {
    ========================================================================== */
 .btn {
   line-height: 40px;
-  display: inline-block;
+  display: flex;
   padding: 0 25px;
   cursor: pointer;
   font-family: "Roboto", "Arial", "Helvetica Neue", sans-serif;
@@ -201,29 +202,38 @@ h6 {
   -o-transition: all 0.4s ease;
   -moz-transition: all 0.4s ease;
   transition: all 0.4s ease;
-  font-size: 14px;
+  font-size: 20px;
+  display: flex;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
   font-weight: 700;
+
 }
 
 .btn--radius {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
-  border-radius: 3px;
+  border-radius: 53px;
+  width: 350px;
+  height: 60px;
+  
 }
 
 .btn--green {
-  background: #57b846;
+  background: #4657b8;
 }
 
 .btn--green:hover {
-  background: #4dae3c;
+  background: rgb(174, 60, 60);
 }
 
 /* ==========================================================================
    #DATE PICKER
    ========================================================================== */
 td.active {
-  background-color: #2c6ed5;
+  background-color: #2cd548;
 }
 
 input[type="date" i] {
@@ -441,7 +451,7 @@ input {
 }
 
 .card-1 .card-heading {
-  background: url("../images/bg-head-02.jpg") center center/cover no-repeat;
+  background: url("../images/tinacos.jpg") center center/cover no-repeat;
   padding-top: 210px;
 }
 
