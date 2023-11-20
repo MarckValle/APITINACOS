@@ -12,10 +12,17 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 import os
 from pathlib import Path
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
+# import environ
+
+# # Carga las variables de entorno desde un archivo llamado .env
+# env = environ.Env()
+# env.read_env()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -75,7 +82,10 @@ WSGI_APPLICATION = 'APIMARCK.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
+# DATABASES = {
+    
+#     'default': dj_database_url.parse(env('DATABASE_URL'))
+# } 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -133,5 +143,13 @@ STATIC_ROOT = BASE_DIR / "staticfiles" # new
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
+# Configuración para el envío de correos electrónicos
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com' #servidor de gmail
+EMAIL_PORT = 587 # puerto para smtp
+EMAIL_USE_TLS = True #cifrado tls
+EMAIL_HOST_USER = 'marco.vallejo2000@gmail.com' #correo 
+EMAIL_HOST_PASSWORD = 'guphsxdeilkvdtex' #contraseña de gmail
+# Opcional: Configuración para el nombre del remitente predeterminado
+DEFAULT_FROM_EMAIL = 'marco.vallejo2000@gmail.com'
 
