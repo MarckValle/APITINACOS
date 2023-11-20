@@ -170,14 +170,14 @@ def formulario_verificacion(request):
                 messages.error(request, 'Verifica los campos, todos son obligatorios!')
                 return render(request, 'signup.html')
 
-            # Verificar si el correo ya existe en la base de datos
-            if registro_cliente.objects.filter(nombre=correoF).exists():
-                messages.error(request, 'Este usuario ya existe!')
-                return render(request, 'signup.html')
+            # # Verificar si el correo ya existe en la base de datos
+            # if registro_cliente.objects.filter(nombre=correoF).exists():
+            #     messages.error(request, 'Este usuario ya existe!')
+            #     return render(request, 'signup.html')
 
-            if not tinaco.objects.filter(idTinaco=codigoTi).exists():
-                messages.error(request, 'Este tinaco no existe, verifica la existencia!')
-                return render(request, 'signup.html')
+            # if not tinaco.objects.filter(idTinaco=codigoTi).exists():
+            #     messages.error(request, 'Este tinaco no existe, verifica la existencia!')
+            #     return render(request, 'signup.html')
 
             # Guardar el usuario en Firebase
             data = {
