@@ -3,6 +3,7 @@ import json
 from urllib import request
 from django.forms import ValidationError
 from django.shortcuts import redirect, render
+from django.template import RequestContext
 from rest_framework.views import APIView
 from django.utils.crypto import get_random_string
 from api.models import registro_cliente
@@ -42,9 +43,12 @@ def get_csrf_token(request):
 
 
 
-class Home(APIView):
+class Homeq(APIView):
     template_name="index.html"
+   
     def get(self, request):
+        return render(request, self.template_name)
+    def post(self, request):
         return render(request, self.template_name)
     
 class Login(APIView):
@@ -136,12 +140,7 @@ def login(request):
 
 from django.http import JsonResponse
 from django.views.decorators.csrf import ensure_csrf_cookie
-
-@ensure_csrf_cookie
-def formulario_verificacion(request):
-    if request.method == 'POST':
-        # Configuración de Firebase
-        firebase_config = {
+firebase_config = {
            "apiKey": "AIzaSyD_81il9tAwbSOx3Rg4b-aC-xOdxMPK9m4",
             "authDomain": "apitinacos.firebaseapp.com",
             "databaseURL": "https://apitinacos-default-rtdb.firebaseio.com",
@@ -151,6 +150,11 @@ def formulario_verificacion(request):
             "appId": "1:950663012062:web:ff0ca609ee54cf2af22c4f",
             "measurementId": "G-PBESQLCYW6"
         }
+@ensure_csrf_cookie
+def formulario_verificacion(request):
+    if request.method == 'POST':
+        # Configuración de Firebase
+        
 
         firebase = pyrebase.initialize_app(firebase_config)
         db = firebase.database()
@@ -164,12 +168,13 @@ def formulario_verificacion(request):
         codigoTi = request.POST['res_code']
 
         genero = request.POST.get('gender')  # Utiliza get para manejar campos no presentes
-
+        auth = firebase.auth()
         try:
             if not nombre or not paterno or not materno or not correoF or not passw or not genero or not codigoTi:
                 messages.error(request, 'Verifica los campos, todos son obligatorios!')
                 return render(request, 'signup.html')
 
+            user = auth.create_user_with_email_and_password(correoF, passw) 
             # # Verificar si el correo ya existe en la base de datos
             # if registro_cliente.objects.filter(nombre=correoF).exists():
             #     messages.error(request, 'Este usuario ya existe!')
@@ -191,6 +196,7 @@ def formulario_verificacion(request):
             }
 
             db.child("cliente").push(data)
+            
 
             # Enviar correo de verificación
             # (Aquí va el código para enviar el correo)
@@ -205,6 +211,50 @@ def formulario_verificacion(request):
         except MultiValueDictKeyError:
             messages.error(request, 'Error multiValor!')
             return render(request, 'signup.html')
-
+        except:
+            messages.error(request, 'Error este correo ya existe!')
+            return render(request, 'signup.html')
     else:
         return render(request, 'signup.html')
+
+# views.py
+
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+
+# Firebase configuration
+
+
+@csrf_exempt
+def login_view(request):
+    if request.method == 'POST':
+        
+
+        firebase = pyrebase.initialize_app(firebase_config)
+        auth = firebase.auth()
+        email = request.POST.get('emailF')
+        password = request.POST.get('passwordF')
+        
+        try:
+            # Intenta iniciar sesión con el correo y la contraseña proporcionados
+            user = auth.sign_in_with_email_and_password(email, password)
+
+            # Almacena información del usuario en la sesión si es necesario
+            request.session['user_id'] = user['localId']
+
+            # Accede a la base de datos en tiempo real
+            db = firebase.database()
+            user_data = db.child("cliente").child(user['localId']).get().val()
+
+            # Ahora `user_data` contiene los datos específicos del usuario
+            # Puedes utilizar estos datos según tus necesidades
+
+            messages.success(request, 'Inicio de sesión exitoso!')
+            return redirect('index')  # Reemplaza 'inicio' con el nombre de tu vista de inicio
+        except Exception as e:
+            messages.error(request, 'Error al iniciar sesión: {}'.format(e))
+            return render(request, 'login.html')
+
+    return render(request, 'login.html')

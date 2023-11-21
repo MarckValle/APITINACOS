@@ -23,6 +23,9 @@
     <!-- Vendor CSS-->
     <link href="{% static 'vendor/select2/select2.min.css'%}" rel="stylesheet" media="all">
     <link href="{% static 'vendor/datepicker/daterangepicker.css'%}" rel="stylesheet" media="all">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10">
+    </link>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     <!-- Main CSS-->
     <link href="{% static 'css/main.css'%}" rel="stylesheet" media="all">
@@ -35,12 +38,50 @@
                 <div class="card-heading"></div>
                 <div class="card-body">
                     <h2 class="title">Iniciar Sesión</h2>
-                    <form method="POST">
+                    <form method="POST" >
+                        {% csrf_token %}
+                        {% if messages %}
+                        {% for message in messages %}
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function () {
+                                const messageType = "{{ message.tags }}";
+                                let icon, text;
+
+                                switch (messageType) {
+                                    case 'success':
+                                        icon = 'success';
+                                        text = "{{ message }}";
+                                        break;
+                                    case 'error':
+                                        icon = 'error';
+                                        text = "{{ message }}";
+                                        break;
+                                    case 'warning':
+                                        icon = 'warning';
+                                        text = "{{ message }}";
+                                        break;
+                                    default:
+                                        icon = 'info';
+                                        text = "{{ message }}";
+                                        break;
+                                }
+
+                                Swal.fire({
+                                    icon: icon,
+                                    title: text,
+                                    confirmButtonText: 'OK'
+                                });
+                            });
+                        </script>
+                        {% endfor %}
+                        {% endif %}
+
+
                         <div class="input-group">
-                            <input class="input--style-1" type="text" placeholder="Numero de Tinaco" name="name">
+                            <input class="input--style-1" type="text" placeholder="Numero de Tinaco" name="emailF">
                         </div>
                         <div class="input-group">
-                            <input class="input--style-1" type="text" placeholder="Contraseña" name="name">
+                            <input class="input--style-1" type="text" placeholder="Contraseña" name="passwordF">
                         </div>
                         <div class="">
                             <p>¿Aún no tienes cuenta?</p>
@@ -69,7 +110,7 @@
     <script src="{% static 'vendor/datepicker/daterangepicker.js'%}"></script>
 
     <!-- Main JS-->
-    <script src="{% static 'js/global.js'}"></script>
+    <script src="{% static 'js/global.js'%}"></script>
 
 </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 

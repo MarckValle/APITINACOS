@@ -16,13 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from api.views import Login
-from api.views import Home
+from api.views import Homeq
 from api.views import SignIn
 from api import views
 urlpatterns = [
     #path('admin/', admin.site.urls),
-    path('Home/', Home.as_view(),name='Home'),
-    path('Login/', Login.as_view(),name='Login'),
+    path('index/', Homeq.as_view(),name='index'),
+    path('Login/', views.login_view,name='Login'),
     path('', views.formulario_verificacion,name='SignIn')
 ]
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns # new

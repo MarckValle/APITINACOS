@@ -16,6 +16,16 @@ import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+FIREBASE_CONFIG = {
+    "apiKey": "AIzaSyD_81il9tAwbSOx3Rg4b-aC-xOdxMPK9m4",
+    "authDomain": "apitinacos.firebaseapp.com",
+    "databaseURL": "https://apitinacos-default-rtdb.firebaseio.com",
+    "projectId": "apitinacos",
+    "storageBucket": "apitinacos.appspot.com",
+    "messagingSenderId": "950663012062",
+    "appId": "1:950663012062:web:ff0ca609ee54cf2af22c4f",
+    "measurementId": "G-PBESQLCYW6"
+        }
 
 
 # import environ
