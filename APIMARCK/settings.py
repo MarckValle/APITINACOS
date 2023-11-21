@@ -98,7 +98,12 @@ WSGI_APPLICATION = 'APIMARCK.wsgi.application'
 # } 
 DATABASES = {
     'default': {
-      
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'controltinacos',
+        'USER': 'postgres',
+        'PASSWORD': '1234',
+        'HOST': 'localhost', # o la dirección de tu servidor de base de datos
+        'PORT': None, # el puerto por defecto para PostgreSQL
     }
 }
 
