@@ -118,23 +118,23 @@ class SignIn(APIView):
 #     else:
 #         return render(request, 'signup.html')
     
-def login(request):
-    if request.method == 'POST':
-        email = request.POST.get('email')  # Utiliza get() para evitar KeyError
-        password = request.POST.get('password')
+# def login(request):
+#     if request.method == 'POST':
+#         email = request.POST.get('email')  # Utiliza get() para evitar KeyError
+#         password = request.POST.get('password')
 
-        try:
-            if email == ('admin@gmail.com'):
-                return redirect('dashboard')  # Redirige a una vista llamada 'index'
-            user = registro_cliente.objects.get(name=email, passw=password)
-            request.session['name'] = user.name
-            return redirect('index1')  # Redirige a una vista llamada 'index'
-        except registro_cliente.DoesNotExist:
-            messages.error(request, '')
-        except registro_cliente.MultipleObjectsReturned:
-            messages.error(request, 'No se puede acceder')
+#         try:
+#             if email == ('admin@gmail.com'):
+#                 return redirect('dashboard')  # Redirige a una vista llamada 'index'
+#             user = registro_cliente.objects.get(name=email, passw=password)
+#             request.session['name'] = user.name
+#             return redirect('index1')  # Redirige a una vista llamada 'index'
+#         except registro_cliente.DoesNotExist:
+#             messages.error(request, '')
+#         except registro_cliente.MultipleObjectsReturned:
+#             messages.error(request, 'No se puede acceder')
         
-    return render(request,'SIGN UP & SIGN IN PAGE.html')
+#     return render(request,'SIGN UP & SIGN IN PAGE.html')
 
 # views.py
 
