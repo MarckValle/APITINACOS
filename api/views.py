@@ -1,13 +1,10 @@
-import datetime
-import json
 from urllib import request
 from django.forms import ValidationError
 from django.shortcuts import redirect, render
 from django.template import RequestContext
 from rest_framework.views import APIView
 from django.utils.crypto import get_random_string
-from api.models import registro_cliente
-from api.models import tinaco
+
 from django.core.mail import send_mail
 from django.contrib import messages
 from datetime import datetime

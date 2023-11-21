@@ -97,13 +97,9 @@ WSGI_APPLICATION = 'APIMARCK.wsgi.application'
 #     'default': dj_database_url.parse(env('DATABASE_URL'))
 # } 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'controltinacos',
-        'USER': 'postgres',
-        'PASSWORD': '1234',
-        'HOST': 'localhost', # o la dirección de tu servidor de base de datos
-        'PORT': None, # el puerto por defecto para PostgreSQL
+     'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / "db.sqlite3",
     }
 }
 
