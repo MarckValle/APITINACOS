@@ -103,7 +103,7 @@ DATABASES = {
         'USER': 'postgres',
         'PASSWORD': '1234',
         'HOST': 'localhost', # o la dirección de tu servidor de base de datos
-        'PORT': '5432', # el puerto por defecto para PostgreSQL
+        'PORT': None, # el puerto por defecto para PostgreSQL
     }
 }
 
